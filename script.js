@@ -97,6 +97,10 @@ document.getElementById('myCanvas').addEventListener('click', function(e) {
 	if (clickedX < circle.right && clickedX > circle.left && clickedY > circle.top && clickedY < circle.bottom) {
 		playSound();
 		scoreSpan.innerText = ++score; // Add 1 to click total on click
+		if (score > 19) {
+			alert('Congratulations! You win!');
+			reset();
+		};
 		dy *= 1.1; // Increase speed of ball
 		dx *= 1.1; // Increase speed of ball
 	}
