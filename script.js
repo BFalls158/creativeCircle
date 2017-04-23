@@ -73,6 +73,11 @@ function reset() {
 
 //Event listeners
 
+//Prevents text highlighting during clicking
+document.body.onselectstart = function() { 
+	return false; 
+};
+
 //Prevents input of non-numeric keys in form
 document.getElementById('radius').addEventListener("keypress", function (e) {
     if (e.which < 48 || e.which > 57) {
