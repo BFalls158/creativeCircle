@@ -19,3 +19,7 @@ body {
 form {
 	font-size: 14pt;
 }
+
+#reset {
+	display: none;
+}

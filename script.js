@@ -65,22 +65,29 @@ function draw() { //function setInterval runs each time.
 function btnClick() { // function to add innerText displaying circle area
 	var areaEle = document.getElementById('area');
 	areaEle.innerText = getArea(getRadius()).toFixed(2);
+	document.getElementById('radius').setAttribute('disabled', 'disabled');
+	document.getElementById('goBtn').style.display = 'none';
+	document.getElementById('reset').style.display = 'inline';
 }
 
+function reset() {
+	location.reload();
+}
 
 //Event listeners
-document.getElementById('radius').addEventListener("keypress", function (evt) {
-    if (evt.which < 48 || evt.which > 57) {
-        evt.preventDefault();
+document.getElementById('radius').addEventListener("keypress", function (e) {
+    if (e.which < 48 || e.which > 57) {
+        e.preventDefault();
     }
 });
 
 document.getElementById('goBtn').addEventListener('click', function() {
 	btnClick();
-})
-
-document.getElementById('goBtn').addEventListener('click', function() {
 	setInterval(draw, inter);
+});
+
+document.getElementById('reset').addEventListener('click', function() {
+	reset();
 });
 
 document.getElementById('myCanvas').addEventListener('click', function(e) {
