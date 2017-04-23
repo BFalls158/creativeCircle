@@ -1,3 +1,4 @@
+(function(){
 // y/x = 0 x  - - - - - - - >
 // y
 // |
@@ -11,9 +12,9 @@ var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext("2d");
 var x = canvas.width/2; //start centered on x axis
 var y = canvas.height/2; // start centered on y-axis
-var dx = 2;
-var dy = -2;
-var inter = 10;
+var dx = 2; // used to ammend x, creates movement
+var dy = -2; // used to ammend y, creates movement
+var inter = 10; // how often the draw funciton is ran, lower numbers speed up ball
 var Circle = function(x, y, radius) { // Object constructor to make circle object w/ diminsions
     this.left = x - radius;
     this.top = y - radius;
@@ -32,6 +33,7 @@ function playSound() {
 function getArea(r){
 	return Math.pow(r, 2) * Math.PI;
 }
+
 function getRadius() {
 	return Number(document.getElementById('radius').value);
 }
@@ -55,14 +57,16 @@ function drawBall() { //function to draw ball each time setInterval iterates
 	}	
 }
 
-function draw() { //function setInterval runs each time.
+//function setInterval runs each time. redraws circle to show movement.
+function draw() { 
 	ctx.clearRect(0, 0, canvas.width, canvas.height); //clears canvas to create movement via drawings
     drawBall();
     x += dx; // increases x cordinates (gives direction)
     y += dy; // increases y cordinates (gives direction)
 }
 
-function btnClick() { // function to add innerText displaying circle area
+// function to add innerText displaying circle area
+function btnClick() { 
 	var areaEle = document.getElementById('area');
 	areaEle.innerText = getArea(getRadius()).toFixed(2);
 	document.getElementById('radius').setAttribute('disabled', 'disabled');
@@ -70,28 +74,33 @@ function btnClick() { // function to add innerText displaying circle area
 	document.getElementById('reset').style.display = 'inline';
 }
 
+//Resets gamestate.
 function reset() {
 	location.reload();
 }
 
 //Event listeners
+
+//Prevents input of non-numeric keys in form
 document.getElementById('radius').addEventListener("keypress", function (e) {
     if (e.which < 48 || e.which > 57) {
         e.preventDefault();
     }
 });
 
+//Starts game
 document.getElementById('goBtn').addEventListener('click', function() {
 	btnClick();
 	setInterval(draw, inter);
 });
 
+//On-click handler that resets page's gamestate.
 document.getElementById('reset').addEventListener('click', function() {
 	reset();
 });
 
 document.getElementById('myCanvas').addEventListener('click', function(e) {
-	var clickedX = e.pageX - this.offsetLeft;
+	var clickedX = e.pageX - this.offsetLeft; //Determine click location, canvas position offset by distance from edge of page
 	var clickedY = e.pageY - this.offsetTop;
 	var circle = new Circle(x, y, getRadius());
 	if (clickedX < circle.right && clickedX > circle.left && clickedY > circle.top && clickedY < circle.bottom) {
@@ -105,3 +114,4 @@ document.getElementById('myCanvas').addEventListener('click', function(e) {
 		dx *= 1.1; // Increase speed of ball
 	}
 });
+}());
