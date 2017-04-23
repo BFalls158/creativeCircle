@@ -86,6 +86,13 @@ document.getElementById('goBtn').addEventListener('click', function() {
 	setInterval(draw, inter);
 });
 
+//Also starts game Works on enter press
+document.getElementById('radius').addEventListener('keyup', function(e) {
+	if (e.keyCode == 13){
+	document.getElementById('goBtn').click();
+	};
+});
+
 //On-click handler that resets page's gamestate.
 document.getElementById('reset').addEventListener('click', function() {
 	reset();
