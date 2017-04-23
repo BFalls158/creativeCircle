@@ -13,13 +13,21 @@ var x = canvas.width/2; //start centered on x axis
 var y = canvas.height/2; // start centered on y-axis
 var dx = 2;
 var dy = -2;
-var inter = 30;
-var Circle = function(x, y, radius) { // Object constructor to make circle object
+var inter = 10;
+var Circle = function(x, y, radius) { // Object constructor to make circle object w/ diminsions
     this.left = x - radius;
     this.top = y - radius;
     this.right = x + radius;
     this.bottom = y + radius;
 };
+var scoreSpan = document.getElementById('score');
+var score = 0;
+
+// function declarations
+function playSound() {
+  var sound = document.getElementById("audio");
+  sound.play();
+}
 
 function getArea(r){
 	return Math.pow(r, 2) * Math.PI;
@@ -57,8 +65,11 @@ function draw() { //function setInterval runs each time.
 function btnClick() { // function to add innerText displaying circle area
 	var areaEle = document.getElementById('area');
 	areaEle.innerText = getArea(getRadius()).toFixed(2);
+	var radius = document.getElementById('radius').value;
 }
 
+
+//Event listeners
 document.getElementById('goBtn').addEventListener('click', function() {
 	btnClick();
 })
@@ -72,7 +83,8 @@ document.getElementById('myCanvas').addEventListener('click', function(e) {
 	var clickedY = e.pageY - this.offsetTop;
 	var circle = new Circle(x, y, getRadius());
 	if (clickedX < circle.right && clickedX > circle.left && clickedY > circle.top && clickedY < circle.bottom) {
-		alert('You clicked the circle!');
+		playSound();
+		scoreSpan.innerText = ++score; // Add 1 to click total on click
 		dy *= 1.1; // Increase speed of ball
 		dx *= 1.1; // Increase speed of ball
 	}
