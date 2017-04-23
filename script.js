@@ -42,14 +42,14 @@ function drawBall() { //function to draw ball each time setInterval iterates
     y += dy;
     if(x + dx > canvas.width-radius || x + dx < radius) { // change direction of ball if it reaches sides
     dx = -dx;
-}
+	};
 
 	if(y + dy > canvas.height-radius || y + dy < radius) { // change direction of ball if it reaches bottom/top
 	    dy = -dy;
-	}	
+	};	
 }
 
-//function setInterval runs each time. redraws circle to show movement.
+//function that setInterval runs each time. redraws circle to show movement.
 function draw() { 
 	ctx.clearRect(0, 0, canvas.width, canvas.height); //clears canvas to create movement via drawings
     drawBall();
