@@ -37,10 +37,10 @@ function getRadius() {
 }
 
 function drawBall() { //function to draw ball each time setInterval iterates
-	var radius = Number(document.getElementById('radius').value);
+	var radius = getRadius();
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI*2);
-    ctx.fillStyle = "#0033A0";
+    ctx.fillStyle = "#0ead00";
     ctx.fill();
     ctx.closePath();
 
@@ -65,11 +65,16 @@ function draw() { //function setInterval runs each time.
 function btnClick() { // function to add innerText displaying circle area
 	var areaEle = document.getElementById('area');
 	areaEle.innerText = getArea(getRadius()).toFixed(2);
-	var radius = document.getElementById('radius').value;
 }
 
 
 //Event listeners
+document.getElementById('radius').addEventListener("keypress", function (evt) {
+    if (evt.which < 48 || evt.which > 57) {
+        evt.preventDefault();
+    }
+});
+
 document.getElementById('goBtn').addEventListener('click', function() {
 	btnClick();
 })
