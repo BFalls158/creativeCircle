@@ -116,6 +116,8 @@ document.getElementById('myCanvas').addEventListener('click', function(e) {
 		};
 		dy *= 1.1; // Increase speed of ball
 		dx *= 1.1; // Increase speed of ball
+		dx = -dx;
+		dy = -dy;
 	}
 });
 }());
