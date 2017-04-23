@@ -107,6 +107,7 @@ document.getElementById('myCanvas').addEventListener('click', function(e) {
 	var clickedX = e.pageX - this.offsetLeft; //Determine click location, canvas position offset by distance from edge of page
 	var clickedY = e.pageY - this.offsetTop;
 	var circle = new Circle(x, y, getRadius());
+	var randomDir = Math.floor(Math.random() * 4); //random number used to determine new direction
 	if (clickedX < circle.right && clickedX > circle.left && clickedY > circle.top && clickedY < circle.bottom) {
 		playSound();
 		scoreSpan.innerText = ++score; // Add 1 to click total on click
@@ -116,8 +117,17 @@ document.getElementById('myCanvas').addEventListener('click', function(e) {
 		};
 		dy *= 1.1; // Increase speed of ball
 		dx *= 1.1; // Increase speed of ball
-		dx = -dx;
-		dy = -dy;
-	}
+		 // Logic for directional change on ball click
+		if (randomDir === 0) {
+			dx = -dx;
+		} else if(randomDir === 1) {
+			dy = -dy;
+		} else if(randomDir === 2) {
+			dx = -dx;
+			dy = -dy;
+		} else {
+			// Do nothing
+		};
+	};
 });
 }());
